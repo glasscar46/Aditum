@@ -15,7 +15,6 @@ export default function AnimalForm() {
         resolver: yupResolver(AnimalSchema)
     })
     const animalEdit = useSelector(state => selectAnimalsById(state, id));
-    console.log([animalEdit])
     let date = new Date(animalEdit?.date)
     function dataFormatada(date) {
         let data = date,
@@ -27,9 +26,7 @@ export default function AnimalForm() {
     const handleSave = (animal) => {
         console.log(animal.date)
         animal.date = dataFormatada(animal.date)
-        console.log(animal.date)
         if (animalEdit?._id) {
-            console.log(animal)
             dispatch(updateAnimal({ ...animal, _id: animalEdit._id }));
         }
         else {
@@ -99,7 +96,7 @@ export default function AnimalForm() {
                                 <input
                                     type="date"
                                     className="form-control"
-                                    defaultValue={console.log(date.toLocaleString())}
+                                    defaultValue={date.toLocaleString()}
                                     {...register("date")}
                                     name="date" />
                                 <p style={{ color: "red" }}>{errors?.date ? "inserir uma data valida" : ""}</p>
