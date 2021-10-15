@@ -15,7 +15,6 @@ export default function AnimalForm() {
         resolver: yupResolver(AnimalSchema)
     })
     const animalEdit = useSelector(state => selectAnimalsById(state, id));
-    let date = new Date(animalEdit?.date)
     function dataFormatada(date) {
         let data = date,
             dia = data.getDate().toString().padStart(2, "0"),
@@ -95,7 +94,7 @@ export default function AnimalForm() {
                                 <input
                                     type="date"
                                     className="form-control"
-                                    defaultValue={date.toLocaleString()}
+                                    value={animalEdit?.date}
                                     {...register("date")}
                                     name="date" />
                                 <p style={{ color: "red" }}>{errors?.date ? "inserir uma data valida" : ""}</p>
