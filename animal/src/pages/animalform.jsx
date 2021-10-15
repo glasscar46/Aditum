@@ -24,7 +24,6 @@ export default function AnimalForm() {
         return `${mes}/${dia}/${ano} `;
     }
     const handleSave = (animal) => {
-        console.log(animal.date)
         animal.date = dataFormatada(animal.date)
         if (animalEdit?._id) {
             dispatch(updateAnimal({ ...animal, _id: animalEdit._id }));
