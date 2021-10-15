@@ -20,7 +20,7 @@ export default function AnimalForm() {
             dia = data.getDate().toString().padStart(2, "0"),
             mes = (data.getMonth() + 1).toString().padStart(2, "0"),
             ano = data.getFullYear();
-        return `${ano}/${mes}/${dia} `;
+        return `${ano}-${mes}-${dia} `;
     }
     const handleSave = (animal) => {
         animal.date = dataFormatada(animal.date)
@@ -94,7 +94,7 @@ export default function AnimalForm() {
                                 <input
                                     type="date"
                                     className="form-control"
-                                    value={animalEdit?.date}
+                                    DefaultValue={animalEdit?.date}
                                     {...register("date")}
                                     name="date" />
                                 <p style={{ color: "red" }}>{errors?.date ? "inserir uma data valida" : ""}</p>
