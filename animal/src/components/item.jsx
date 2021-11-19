@@ -5,19 +5,24 @@ import { Link } from "react-router-dom";
 
 export default function Item({animal}) {
     const dispatch = useDispatch()
-    const handleDelete = (e)=>{
+    const handleDelete = ()=>{
         dispatch(deleteAnimal(animal._id))
     }
    
-    return(
-    <tr style={{height: "10px"}}>
-        <td>{animal.date}</td>
-        <td>{animal.name}</td>
-        <td>{animal.type}</td>
-        <td>{animal.weight + " Kg"}</td>
-        <td><a><Link to={`/${animal._id}/edit`}>Alterar</Link></a></td>
-        <td><button type="button" className="btn btn-link" onClick={handleDelete}>Excluir</button></td>
-    </tr>
- );
+    if (animal != null && animal.date != null && animal.name != null && animal.type != null && animal.weight != null) {
+        return(
+        <tr style={{height: "10px"}}>
+            <td>{animal.date}</td>
+            <td>{animal.name}</td>
+            <td>{animal.type}</td>
+            <td>{animal.weight + " Kg"}</td>
+            <td><Link to={`/${animal._id}/edit`} id="editLink">Alterar</Link></td>
+            <td><button id="deletebtn" type="button" className="btn btn-link" onClick={handleDelete}>Excluir</button></td>
+        </tr>
+     );
+    } else {
+        return(<tr><td colSpan={3}>Nao foi possivel exibir o animal.</td></tr>)
+        
+    }
 
 }

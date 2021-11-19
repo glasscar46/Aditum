@@ -71,7 +71,7 @@ def update_animal(id):
             animal["_id"] = str(animal["_id"])
             return Response(response=json.dumps(animal),status=200,mimetype="application/json")
         else:
-            return response(response=json.dumps({"error":"user error"}),status=400, mimetype="application/json")
+            return Response(response=json.dumps({"error":"user error"}),status=400, mimetype="application/json")
 
     except Exception as ex:
         return Response(response=json.dumps({"error": ex}), status=500, mimetype="application/json")
