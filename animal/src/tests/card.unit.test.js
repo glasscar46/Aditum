@@ -4,7 +4,6 @@ import React from 'react'
 import Card from '../components/card';
 import Item from '../components/item';
 import {Provider} from 'react-redux'
-import { Router} from 'react-router-dom'
 import {configureStore} from '@reduxjs/toolkit'
 import animalReducer from '../redux/animalSlice';
 

@@ -19,6 +19,7 @@ export default function AnimalList(props){
             dispatch(fetchAnimals)
         }
     },[status,dispatch])
+    console.log(animals)
     return(
         <>
             <div className="container justify-content-md-center">
@@ -27,7 +28,7 @@ export default function AnimalList(props){
             </div>
             <div className="row">
                 <Card>
-                    {animals.map(animal=><Item animal={animal} key={animal._id}/>)}
+                    {animals?.map(animal=><Item animal={animal} key={animal._id}/>)}
                 </Card>
             </div>
             </div>

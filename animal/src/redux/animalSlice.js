@@ -50,11 +50,11 @@ const animalSlice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchAnimals.fulfilled]: (state, { payload }) => {
-      animalAdapter.setAll(state, payload);
+      if(payload) animalAdapter.setAll(state, payload);
       state.status = "ready";
     },
     [getAnimal.fulfilled]: (state, { payload }) => {
-      animalAdapter.setAll(state, payload);
+      if(payload) animalAdapter.setAll(state, payload);
       state.status = "ready";
     },
     [saveAnimal.fulfilled]: (state, { payload }) => {
