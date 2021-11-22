@@ -14,7 +14,7 @@ export default function AnimalForm() {
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(AnimalSchema)
     })
-    const animalEdit = useSelector(state => selectAnimalsById(state, id));
+     const animalEdit = useSelector(state => selectAnimalsById(state, id));
     function dataFormatada(date) {
         let data = date,
             dia = data.getDate().toString().padStart(2, "0"),
@@ -49,6 +49,7 @@ export default function AnimalForm() {
                                 <input
                                     type="text"
                                     className="form-control"
+                                    data-testid='name-input'
                                     placeholder=""
                                     {...register("name")}
                                     defaultValue={animalEdit?.name}
@@ -61,7 +62,10 @@ export default function AnimalForm() {
                                 <b>Tipo</b>
                             </label>
                             <div className="col-sm-6">
-                                <select className="form-select form-select-lg" defaultValue={animalEdit?.type} name="type" {...register("type")}>
+                                <select className="form-select form-select-lg"
+                                 defaultValue={animalEdit?.type} 
+                                 data-testid='type-input'
+                                 name="type" {...register("type")}>
                                     <option value={null}></option>
                                     <option value="Cachorro">Cachorro</option>
                                     <option value="Gato">Gato</option>
@@ -69,7 +73,7 @@ export default function AnimalForm() {
                                     <option value="Sapo">Sapo</option>
                                     <option value="Camelo">Camelo</option>
                                 </select>
-                                <p style={{ color: "red" }}>{errors?.type ? "selecionar um tipo" : ""}</p>
+                                <p data-testid='type-error' style={{ color: "red" }}>{errors?.type ? "selecionar um tipo" : ""}</p>
                             </div>
                         </div>
                         <div class="row mb-3 justify-content-center">
@@ -81,10 +85,11 @@ export default function AnimalForm() {
                                     type="number"
                                     class="form-control"
                                     placeholder="Peso em kg"
+                                    data-testid='weight-input'
                                     defaultValue={animalEdit?.weight}
                                     {...register("weight")}
                                     name="weight" /></div>
-                            <p style={{ color: "red" }}>{errors?.weight ? "colocar um peso valido(maior que 0)" : ""}</p>
+                            <p data-testid='weight-error' style={{ color: "red" }}>{errors?.weight ? "colocar um peso valido(maior que 0)" : ""}</p>
                         </div>
                         <div className="row mb-3 justify-content-center">
                             <label for="validationTooltip01" className="col-sm-2 col-form-label">
@@ -94,10 +99,11 @@ export default function AnimalForm() {
                                 <input
                                     type="date"
                                     className="form-control"
+                                    data-testid='date-input'
                                     DefaultValue={animalEdit?.date}
                                     {...register("date")}
                                     name="date" />
-                                <p style={{ color: "red" }}>{errors?.date ? "inserir uma data valida" : ""}</p>
+                                <p data-testid='date-error' style={{ color: "red" }}>{errors?.date ? "inserir uma data valida" : ""}</p>
                             </div>
                         </div>
                     </div>

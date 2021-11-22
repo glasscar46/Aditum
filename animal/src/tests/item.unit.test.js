@@ -6,7 +6,6 @@ import Item from '../components/item';
 import {Provider} from 'react-redux'
 import {createMemoryHistory} from 'history'
 import { configureStore } from '@reduxjs/toolkit';
-import { deleteAnimal } from "../redux/animalSlice";
 import animalReducer from '../redux/animalSlice';
 import { Router} from 'react-router-dom'
 
@@ -33,8 +32,8 @@ describe('item unit tests', () => {
         expect(screen.getByText(/dog/i)).toBeInTheDocument();
     });
 
+    const history = createMemoryHistory()
     test('edit button', () => {
-        const history = createMemoryHistory()
         const animal = { date: "10-12-2010", name: "cathy", weight: 10, _id: 1, type: 'dog' }
         const {container} = render(<Provider store={store}><Router history={history}><table><tbody><Item animal={animal} /></tbody></table></Router></Provider>);
         const leftclick = { button : 0 };
@@ -46,7 +45,7 @@ describe('item unit tests', () => {
         const animal = { date: "10-12-2010", name: "cathy", weight: 10, _id: 1, type: 'dog' }
         const {container} = render(<Provider store={store}><Router history={history}><table><tbody><Item animal={animal} /></tbody></table></Router></Provider>);
         const leftclick = { button : 0 };
-        deleteAnimal.mockImplementation(param=>{return(param)});
+        deleteAnimal.mockImplementation(param=>param);
         userEvent.click(container.querySelector("#deletebtn"),leftclick);
         expect(deleteAnimal).toHaveBeenCalledTimes(1);
         expect(deleteAnimal).toHaveBeenCalledWith(1);

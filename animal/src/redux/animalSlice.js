@@ -37,7 +37,6 @@ export const deleteAnimal = createAsyncThunk(
 export const updateAnimal = createAsyncThunk(
   "database/updateAnimal",
   async (animal) => {
-    console.log(animal);
     return await httpPut(`${url}/${animal._id}`, animal);
   }
 );
@@ -59,6 +58,10 @@ const animalSlice = createSlice({
     },
     [saveAnimal.fulfilled]: (state, { payload }) => {
       animalAdapter.addOne(state, payload);
+      state.status = "ready";
+    },
+    [getAnimal.fulfilled]: (state,{payload})=>{
+      animalAdapter.setAll(state,payload);
       state.status = "ready";
     },
     [updateAnimal.fulfilled]: (state, { payload }) => {
