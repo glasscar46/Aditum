@@ -112,6 +112,41 @@ describe('AnimalSlice unit tests', () => {
         expect(store.getState().status).toBe("failed");
         expect(store.getState().entities).toEqual({});
     });
+
+    const pending = (store)=>{
+        expect(store.getState().status).toBe('loading');
+    }
+    const _mockhttp = (a)=>{
+        a.mockImplementation(()=>setTimeout(()=>Promise.resolve(),5000))
+    }
+    test('getAnimal pending',() => {
+        _mockhttp(httpGet)
+        store.dispatch(getAnimal());
+        pending(store);
+    });
+    test('saveanimal pending', () => {
+        _mockhttp(httpPost)
+        store.dispatch(saveAnimal(animalInitial));
+        pending(store);
+    });
+    test('deleteAnimal pending',()=>{
+        _mockhttp(httpDelete)
+        store.dispatch(deleteAnimal(1));
+        pending(store);
+    });
+    test('updateAnimal pending', () => {
+        _mockhttp(httpPut)
+        store.dispatch(updateAnimal(animalInitial));
+        pending(store);
+    });
+    test('fetchAnimal pending', () => {
+        _mockhttp(httpGet)
+        store.dispatch(fetchAnimals());
+        pending(store);
+    })
+    
+    
+    
     
     
 })

@@ -69,7 +69,7 @@ const animalSlice = createSlice({
       animalAdapter.upsertOne(state, payload);
     },
     [deleteAnimal.pending]: (state) => {
-      state.status = "pending";
+      state.status = "loading";
     },
     [deleteAnimal.fulfilled]: (state, { payload }) => {
       animalAdapter.removeOne(state, payload);
