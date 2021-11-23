@@ -6,6 +6,6 @@ setLocale(ptForm);
 export let AnimalSchema = object().shape({
   name: string().max(12).min(3).required(),
   type: string().required(),
-  weight: number().positive().required(),
+  weight: number().positive().moreThan(0).required(),
   date: date().required(),
 });

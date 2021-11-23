@@ -42,7 +42,7 @@ export default function AnimalForm() {
                 <form className="needs-validation" onSubmit={handleSubmit(handleSave)}>
                     <div className=" border border-dark border-3 " >
                         <div className="row mt-2 mb-3 justify-content-center">
-                            <label for="validationTooltip01" className="col-sm-2 col-form-label">
+                            <label htmlFor="validationTooltip01" className="col-sm-2 col-form-label">
                                 <b>Name</b>
                             </label>
                             <div className="col-sm-6">
@@ -54,11 +54,11 @@ export default function AnimalForm() {
                                     {...register("name")}
                                     defaultValue={animalEdit?.name}
                                     name="name" />
-                                <p style={{ color: "red" }}>{errors?.name ? "inserir um nome valido" : ""}</p>
+                                <p data-testid='name-error' style={{ color: "red" }}>{errors?.name ? "inserir um nome valido" : ""}</p>
                             </div>
                         </div>
                         <div className="row mb-3 justify-content-center">
-                            <label for="validationTooltip01" className="col-sm-2 col-form-label">
+                            <label htmlFor="validationTooltip01" className="col-sm-2 col-form-label">
                                 <b>Tipo</b>
                             </label>
                             <div className="col-sm-6">
@@ -76,14 +76,14 @@ export default function AnimalForm() {
                                 <p data-testid='type-error' style={{ color: "red" }}>{errors?.type ? "selecionar um tipo" : ""}</p>
                             </div>
                         </div>
-                        <div class="row mb-3 justify-content-center">
-                            <label for="validationTooltip01" className="col-sm-2 col-form-label">
+                        <div className="row mb-3 justify-content-center">
+                            <label htmlFor="validationTooltip01" className="col-sm-2 col-form-label">
                                 <b>Peso</b>
                             </label>
                             <div className="col-sm-6">
                                 <input
                                     type="number"
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder="Peso em kg"
                                     data-testid='weight-input'
                                     defaultValue={animalEdit?.weight}
@@ -92,7 +92,7 @@ export default function AnimalForm() {
                             <p data-testid='weight-error' style={{ color: "red" }}>{errors?.weight ? "colocar um peso valido(maior que 0)" : ""}</p>
                         </div>
                         <div className="row mb-3 justify-content-center">
-                            <label for="validationTooltip01" className="col-sm-2 col-form-label">
+                            <label htmlFor="validationTooltip01" className="col-sm-2 col-form-label">
                                 <b>Data de Nascimento</b>
                             </label>
                             <div className="col-sm-6">
@@ -100,7 +100,7 @@ export default function AnimalForm() {
                                     type="date"
                                     className="form-control"
                                     data-testid='date-input'
-                                    DefaultValue={animalEdit?.date}
+                                    defaultValue={animalEdit?.date}
                                     {...register("date")}
                                     name="date" />
                                 <p data-testid='date-error' style={{ color: "red" }}>{errors?.date ? "inserir uma data valida" : ""}</p>
@@ -108,8 +108,8 @@ export default function AnimalForm() {
                         </div>
                     </div>
                     <div className="row justify-content-md-center">
-                        <input type="submit" className="btn p-1 m-2" value="Salvar" />
-                        <button type="button" className="btn p-1 m-2" onClick={handleCancel}>Cancelar</button>
+                        <input type="submit" data-testid='save-button' className="btn p-1 m-2" value="Salvar" />
+                        <button type="button" data-testid='cancel-button' className="btn p-1 m-2" onClick={handleCancel}>Cancelar</button>
                     </div>
                 </form>
             </div>

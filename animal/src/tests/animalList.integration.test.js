@@ -42,6 +42,7 @@ describe('Home page unit Test', () => {
         expect(screen.getByText(/Novo Animal/)).toBeInTheDocument();
         expect(container.querySelector('td')).toBeInTheDocument();
         expect(screen.getByText(/cathy/)).toBeInTheDocument();
-    })
+    });
+    
     
 })

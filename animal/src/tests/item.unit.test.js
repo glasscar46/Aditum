@@ -1,4 +1,4 @@
-import { render, screen} from '@testing-library/react';
+import { render, screen, fireEvent} from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import React from 'react'
 import '@testing-library/jest-dom'
@@ -6,10 +6,18 @@ import Item from '../components/item';
 import {Provider} from 'react-redux'
 import {createMemoryHistory} from 'history'
 import { configureStore } from '@reduxjs/toolkit';
-import animalReducer from '../redux/animalSlice';
+import animalReducer,{deleteAnimal} from '../redux/animalSlice';
 import { Router} from 'react-router-dom'
-
 import userEvent from "@testing-library/user-event";
+import { httpDelete } from '../utils';
+
+
+jest.mock('../utils.js',()=>({
+    httpDelete: jest.fn(),
+    httpGet : jest.fn(),
+    httpPost : jest.fn(),
+    httpPut : jest.fn(),
+}))
 
 describe('item unit tests', () => {
     const store = configureStore({ reducer: animalReducer});
@@ -41,16 +49,17 @@ describe('item unit tests', () => {
         expect(history.location.pathname).toBe('/1/edit');
     });
 
-   /* test('delete button test', () => {
+   test('delete button test', () => {
         const animal = { date: "10-12-2010", name: "cathy", weight: 10, _id: 1, type: 'dog' }
+        httpDelete.mockImplementation(()=>Promise.resolve(animal._id));
         const {container} = render(<Provider store={store}><Router history={history}><table><tbody><Item animal={animal} /></tbody></table></Router></Provider>);
         const leftclick = { button : 0 };
-        deleteAnimal.mockImplementation(param=>param);
-        userEvent.click(container.querySelector("#deletebtn"),leftclick);
-        expect(deleteAnimal).toHaveBeenCalledTimes(1);
-        expect(deleteAnimal).toHaveBeenCalledWith(1);
-    })*/
-    
-    
-    
+        fireEvent.click(container.querySelector("#deletebtn"),leftclick);
+        console.log(httpDelete)
+        expect(httpDelete).toHaveBeenCalledTimes(1);
+        expect(httpDelete).toHaveBeenCalledWith(1);
+    })
+
+
+
 })
