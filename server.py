@@ -11,6 +11,8 @@ cors = CORS(app,resources={
     }
 },allow_headers='*')
 
+#app.test_client()
+
 try:
     mongo = pymongo.MongoClient(
         host='localhost',
@@ -31,7 +33,9 @@ def create_animal():
        id = dbResponse.inserted_id
        animal = db.animals.find_one({"_id":ObjectId(id)})
        animal["_id"] = str(animal["_id"])
-       return Response(response=json.dumps(animal),status=200,mimetype="application/json")
+       resp =  Response(response=json.dumps(animal),status=200,mimetype="application/json")
+       print(resp)
+       return resp
     except Exception as ex:
         return Response(response=json.dumps(ex),status=500,mimetype="application/json")
 
