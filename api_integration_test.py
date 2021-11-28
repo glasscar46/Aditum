@@ -11,7 +11,7 @@ class TestApi(unittest.TestCase):
     payload['date']= "10-12-2010"
     payload['name']= "cathy"
     payload['type']= "Gato"
-    payload['weight']= "cathy"
+    payload['weight']= "10"
     
     def setUp(self):
         requests.post(self.animals,json={'date': "10-11-2019", 'name': "anabelle", 'weight': 12, 'type': 'Cachorro'})
@@ -27,7 +27,7 @@ class TestApi(unittest.TestCase):
         self.assertEqual(response.headers.get('Content-Type'),'application/json')
 
     def test_post(self):
-        test = {'date': "10-12-2010", 'name': "cathy", 'weight': 10, '_id': 1, 'type': 'dog'}
+       # test = {'date': "10-12-2010", 'name': "cathy", 'weight': 10, '_id': 1, 'type': 'dog'}
         response = requests.post(url=self.animals,json=self.payload)
         print(response)
         self.assertEqual(response.status_code, 200)

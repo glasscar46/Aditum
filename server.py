@@ -1,5 +1,6 @@
 from flask import Flask, Response, request
 import pymongo
+import pymongo.results
 import json
 from bson.objectid import ObjectId
 from flask_cors import  CORS, cross_origin
@@ -44,6 +45,7 @@ def create_animal():
 def get_animals():
     try:
         data = list(db.animals.find())
+        print(db.animals.find())
         for animal in data:
             animal["_id"] = str(animal["_id"])
         return Response(response=json.dumps(data), status=200, mimetype="application/json")
@@ -68,7 +70,6 @@ def get_animal(id):
 def update_animal(id):
     try:
         data = request.json
-        print(data)
         dbResponse = db.animals.update_one({"_id": ObjectId(id)}, {"$set": {'name': data['name'],'type': data['type'],'date': data["date"],'weight': data["weight"]}})
         if dbResponse.modified_count == 1:
             animal = db.animals.find_one({"_id":ObjectId(id)})
