@@ -19,7 +19,6 @@ export default function AnimalList(props){
             dispatch(fetchAnimals)
         }
     },[status,dispatch])
-    console.log(animals)
     return(
         <>
             <div className="container justify-content-md-center">
