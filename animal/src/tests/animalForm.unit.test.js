@@ -18,6 +18,7 @@ describe('AnimalForm Unit test', () => {
     let type
     let submit
     let weight
+    let cancel
     const leftclick = { button : 0}
     beforeEach( async ()=>{
         store = configureStore({
@@ -31,6 +32,7 @@ describe('AnimalForm Unit test', () => {
        type = await screen.getByTestId('type-input')
        weight = await screen.getByTestId('weight-input')
        submit = await screen.getByTestId('save-button')
+       cancel = await screen.getByTestId('cancel-button')
     })
     test('should show all imput fields', () => {
       expect(screen.getByTestId('name-input')).toBeInTheDocument();
@@ -89,23 +91,45 @@ describe('AnimalForm Unit test', () => {
         expect(screen.getByTestId('type-error').textContent).toBe('');
     });
 
-    // test('weight-input error', async () => {
-    //     fireEvent.input(weight,{target: {value: 1}})
-    //     await act(async () => {
-    //         fireEvent.submit(submit);
-    //     });
-    //     expect(screen.getByTestId('weight-error').textContent).toBe('');
-    //     fireEvent.input(name,{target: {value: -15}})
-    //     await act(async () => {
-    //         fireEvent.submit(submit);
-    //     });
-    //     expect(screen.getByTestId('weight-error').textContent).toBe("colocar um peso valido(maior que 0)");
-    //     fireEvent.input(name,{target: {value: -1}})
-    //     await act(async () => {
-    //         fireEvent.submit(submit);
-    //     });
-    //     expect(screen.getByTestId('weight-error').textContent).not.toBe("colocar um peso valido(maior que 0)");
-    // })
+    test('weight-input error', async () => {
+        fireEvent.input(weight,{target: {value: 1}})
+        await act(async () => {
+            fireEvent.submit(submit);
+        });
+        expect(screen.getByTestId('weight-error').textContent).toBe('');
+        fireEvent.input(weight,{target: {value: -15}})
+        await act(async () => {
+            fireEvent.submit(submit);
+        });
+        expect(screen.getByTestId('weight-error').textContent).toBe("colocar um peso valido(maior que 0)");
+        fireEvent.input(weight,{target: {value: 0.1}})
+        await act(async () => {
+            fireEvent.submit(submit);
+        });
+        expect(screen.getByTestId('weight-error').textContent).not.toBe("colocar um peso valido(maior que 0)");
+    })
+
+    test('save button', async () => {
+        fireEvent.input(name,{target: {value: 'abcd'}})
+        fireEvent.input(weight,{target: {value: 0.1}})
+        userEvent.selectOptions(type,'Gato')
+        fireEvent.input(date,{target: {value:'2019-10-10'}})
+        await act(async () => {
+            fireEvent.submit(submit);
+        });
+        expect(history.location.pathname).toBe('/')
+    })
+    test('cancel button', async () => {
+        fireEvent.input(name,{target: {value: 'abcd'}})
+        fireEvent.input(weight,{target: {value: 0.1}})
+        userEvent.selectOptions(type,'Gato')
+        fireEvent.input(date,{target: {value:'2019-10-10'}})
+        await act(async () => {
+            fireEvent.submit(cancel);
+        });
+        expect(history.location.pathname).toBe('/')
+    })
+    
     
     
     
