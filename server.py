@@ -12,8 +12,6 @@ cors = CORS(app,resources={
     }
 },allow_headers='*')
 
-#app.test_client()
-
 try:
     mongo = pymongo.MongoClient(
         host='localhost',
@@ -45,7 +43,6 @@ def create_animal():
 def get_animals():
     try:
         data = list(db.animals.find())
-        print(db.animals.find())
         for animal in data:
             animal["_id"] = str(animal["_id"])
         return Response(response=json.dumps(data), status=200, mimetype="application/json")
