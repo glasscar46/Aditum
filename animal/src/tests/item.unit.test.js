@@ -49,16 +49,15 @@ describe('item unit tests', () => {
         expect(history.location.pathname).toBe('/1/edit');
     });
 
-//    test('delete button test', () => {
-//         const animal = { date: "10-12-2010", name: "cathy", weight: 10, _id: 1, type: 'dog' }
-//         httpDelete.mockImplementation(()=>Promise.resolve(animal._id));
-//         const {container} = render(<Provider store={store}><Router history={history}><table><tbody><Item animal={animal} /></tbody></table></Router></Provider>);
-//         const leftclick = { button : 0 };
-//         fireEvent.click(container.querySelector("#deletebtn"),leftclick);
-//         console.log(httpDelete)
-//         expect(httpDelete).toHaveBeenCalledTimes(1);
-//         expect(httpDelete).toHaveBeenCalledWith(1);
-//     })
+   test('delete button test', () => {
+        const animal = { date: "10-12-2010", name: "cathy", weight: 10, _id: 1, type: 'dog' }
+        httpDelete.mockImplementation(()=>Promise.resolve(animal._id));
+        const {container} = render(<Provider store={store}><Router history={history}><table><tbody><Item animal={animal} /></tbody></table></Router></Provider>);
+        const leftclick = { button : 0 };
+        fireEvent.click(container.querySelector("#deletebtn"),leftclick);
+        expect(httpDelete).toHaveBeenCalledTimes(1);
+        //expect(httpDelete).toHaveBeenCalledWith(1);
+    })
 
 
 
