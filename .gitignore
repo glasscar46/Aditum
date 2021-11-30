@@ -2,3 +2,6 @@
 animal/node_modules
 animal\node_modules
 animal/coverage
+sample/Lib/site-packages/flask_restplus/__about__.py
+sample/Lib
+sample\Lib
